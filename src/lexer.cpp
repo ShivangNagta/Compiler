@@ -153,15 +153,7 @@ vector<Token> get_tok(const string& code) {
             continue;
         }
 
-        // Handle single-character operators and punctuation
-        string singleCharOps = "+-*/;<>()";
-        if (singleCharOps.find(ch) != string::npos) {
-            tokens.push_back({"OPERATOR", string(1, ch)});
-            i++;
-            continue;
-        }
-
-        // Handle logical and compound operators
+        // Logical and compound operators
         string twoCharOps[] = {"==", "!=", "<=", ">=", "||", "&&", "+=", "-=", "*=", "/=", "%="};
         bool matched = false;
         for (const string& op : twoCharOps) {
@@ -173,6 +165,16 @@ vector<Token> get_tok(const string& code) {
             }
         }
         if (matched) continue;
+
+        // Single-character operators and punctuation
+        string singleCharOps = "+-*/%;<>()";
+        if (singleCharOps.find(ch) != string::npos) {
+            tokens.push_back({"OPERATOR", string(1, ch)});
+            i++;
+            continue;
+        }
+
+
 
         // Handle unknown characters
         tokens.push_back({"ERROR", string("Unknown character: ") + ch});
