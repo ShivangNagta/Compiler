@@ -1,0 +1,7 @@
+def greet(name)
+if name == "Alice" || name == "Bob" then
+print("Hello, " + name + "!")
+else
+print("Unknown user: " + name)
+if !(name == "Admin") then
+print("Access denied.")
